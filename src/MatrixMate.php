@@ -11,6 +11,7 @@
 namespace vaersaagod\matrixmate;
 
 use Craft;
+use craft\web\Application;
 use craft\base\Element;
 use craft\base\Plugin;
 use craft\elements\Asset;
@@ -79,8 +80,8 @@ class MatrixMate extends Plugin
         // Defer further initialisation to after plugins have loaded, and only for CP web requests
         if (Craft::$app->getRequest()->getIsCpRequest() && !Craft::$app->getRequest()->getIsConsoleRequest()) {
             Event::on(
-                Plugins::class,
-                Plugins::EVENT_AFTER_LOAD_PLUGINS,
+                Application::class,
+            Application::EVENT_INIT,
                 [$this, 'onAfterLoadPlugins']
             );
         }
